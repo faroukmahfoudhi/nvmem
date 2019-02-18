@@ -1,16 +1,26 @@
 BIN=unit_test
+API=gpNvm
+LIB=lib$(API)
 CC=gcc
-CFLAGS=-I.
+AR=ar
 SRCS := $(wildcard *.c)
 OBJS := $(SRCS:%.c=%.o)
+CFLAGS=-I. -fPIC
+LDFLAGS=-L. -lgpNvm
 
-all: $(BIN)
+all: $(BIN) $(LIB).so 
 
-%.o: %.c $(SRCS)
+%.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(BIN): $(OBJS)
-	$(CC) -o $@ $^ $(CFLAGS)
+$(LIB).a: $(API).o
+	$(AR) rcs $@ $<
+	
+$(LIB).so: $(API).o
+	$(CC) -shared -o $@ $< $(CFLAGS)
+
+$(BIN): $(BIN).o $(LIB).a $(LIB).so
+	$(CC) -o $@ $< $(CFLAGS) $(LDFLAGS)
 
 clean:
-	rm -f *.o $(BIN)
+	rm -f *.o $(BIN) *.so *.a
