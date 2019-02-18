@@ -243,7 +243,7 @@ gpNvm_Result gpNvm_Init(void)
 		fseek(gpNvm_FileDescriptor, sizeof(UInt16)*GPNVM_MEMORY_INDEX_TABLE_SIZE, SEEK_SET);
 		fwrite(gpNvm_AttributesCrcTable, GPNVM_ATTRIBUTES_CRCS_SIZE,1,gpNvm_FileDescriptor);
 		//Set user attributes data section to zeros in file and cache
-		memset(gpNvm_MemoryCache,0,GPNVM_USER_MEMORY_SIZE);
+		memset(gpNvm_MemoryCache,0xFF,GPNVM_USER_MEMORY_SIZE);
 		fseek(gpNvm_FileDescriptor, sizeof(UInt16)*GPNVM_MEMORY_INDEX_TABLE_SIZE + GPNVM_ATTRIBUTES_CRCS_SIZE, SEEK_SET);
 		fwrite(gpNvm_MemoryCache,GPNVM_USER_MEMORY_SIZE,1,gpNvm_FileDescriptor);
 	}
