@@ -148,7 +148,7 @@ static UInt8 gpNvm_MemoryCache[GPNVM_USER_MEMORY_SIZE];
 static UInt16 gpNvm_MemoryIndexTable[GPNVM_MEMORY_INDEX_TABLE_SIZE];
 
 /* Table containing the CRC8 of each attribute data in non-volatile memory */
-static UInt16 gpNvm_AttributesCrcTable[GPNVM_ATTRIBUTES_CRCS_SIZE];
+static UInt8 gpNvm_AttributesCrcTable[GPNVM_ATTRIBUTES_CRCS_SIZE];
 
 /* ==================================================================== */
 /* ==================== Local functions Definition ==================== */
